@@ -5,9 +5,12 @@
 
 
 <div class="container">
-     <% @model.try(:each) do |items| %>
-      <%= image_tag("#{items.image}") %> 
-     <p><%= link_to "#{items.name}",food_item_path(items.id) %></p> 
+    
+     <% @search_items["common"].try(:each) do |item| %>
+     
+     <%=item["food_name"] %>
+      <%= image_tag("#{item["photo"]["thumb"]}") %> 
+     <p><%= link_to "#{item["food_name"]}",food_items_path(name: item["food_name"], image: item["photo"]["thumb"]), method: :post %></p> 
      <% end %>
     
 </div>
