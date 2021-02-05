@@ -5,7 +5,7 @@
 <span>Date Eaten:</span>
 <% date = @model.try(:date) %>
 <% if date.present? %>
- <p><%= date.strftime("%m/%d/%Y") %></p>
+ <p class="food-date"><%= date.strftime("%m/%d/%Y") %></p>
  <% else %>
 <%= render "date_form" %>
 <%end%>

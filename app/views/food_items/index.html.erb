@@ -10,7 +10,11 @@
      
      <%=item["food_name"] %>
       <%= image_tag("#{item["photo"]["thumb"]}") %> 
+      <%# if @model.exists? %>
+       <p><%#= link_to "#{item["food_name"]}",food_item_path(@model.id) %>
+      <%# else %>
      <p><%= link_to "#{item["food_name"]}",food_items_path(name: item["food_name"], image: item["photo"]["thumb"]), method: :post %></p> 
+     <%# end %>
      <% end %>
     
 </div>

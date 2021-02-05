@@ -4,6 +4,7 @@ require 'excon'
 
 
     def index
+     
       @search_params = params[:search] 
 
       res = Excon.get( "https://trackapi.nutritionix.com/v2/search/instant?query=#{@search_params}",
@@ -13,13 +14,7 @@ require 'excon'
                       })
                       
       @search_items = JSON.parse(res.body)
-    #   @search_items["common"].try(:each) do |nutrition_data|
-        
-    # nutrition_data
-    #       # new(nutrition_data)
-    #   end
-      
-      # @model = FoodItem.all.where(FoodItem.arel_table[:name].lower.matches("%#{@search_params}%"))
+     
       
     end
     
@@ -46,24 +41,26 @@ require 'excon'
     end
   
     def new
-     
+    
       @model = FoodItem.new
-      
     end
     
      def create 
-       
      @model = FoodItem.new(name: params[:name], image: params[:image])
-    if  @model.save!
+    if  @model.save
       redirect_to food_item_path(@model.id)
     end
      end
     def update
        @model = FoodItem.find(params[:id])
-      puts @model.inspect
-      puts params.inspect
        @model.update(food_item_date_params)
-       @model.save!
+       if @model.save
+         redirect_to food_item_path @model.id
+        # respond_to do |format|
+        #   format.js { render "_food_date_form" }
+        #   format.html {}
+        #   end
+       end
     end
     
     private
