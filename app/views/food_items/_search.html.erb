@@ -1,0 +1,8 @@
+<h1> Search for food items</h1>
+
+<div class="container">
+<%= form_tag('/', method: :get) %>
+<%= text_field_tag :search ,nil, :placeholder => "Food name" %><br>
+<%= submit_tag "search", name: nil, class: "btn btn-primary" %>
+</div>
+

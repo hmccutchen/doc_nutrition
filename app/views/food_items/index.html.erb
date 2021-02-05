@@ -1,2 +1,13 @@
-<h1>FoodItems#index</h1>
-<p>Find me in app/views/food_items/index.html.erb</p>
+
+<div class="container">
+  <%= render "search" %>
+</div>
+
+
+<div class="container">
+     <% @model.try(:each) do |items| %>
+      <%= image_tag("#{items.image}") %> 
+     <p><%= link_to "#{items.name}",food_item_path(items.id) %></p> 
+     <% end %>
+    
+</div>
