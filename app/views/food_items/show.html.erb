@@ -1,2 +1,11 @@
-<h1>FoodItems#show</h1>
-<p>Find me in app/views/food_items/show.html.erb</p>
+<h1>FoodItem</h1>
+
+<p>Food: <%= @model.name %></p> 
+<p>Calories: <%= @model.try(:calories) %></p>
+<span>Date Eaten:</span>
+<% date = @model.try(:date) %>
+<% if date.present? %>
+ <p class="food-date"><%= date.strftime("%m/%d/%Y") %></p>
+ <% else %>
+<%= render "date_form" %>
+<%end%>
