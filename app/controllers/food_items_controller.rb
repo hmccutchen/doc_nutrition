@@ -1,10 +1,11 @@
 class FoodItemsController < ApplicationController
 require 'rubygems'
 require 'excon'
-
+before_action :authenticate_user!
 
     def index
-     
+        
+      @food_items = current_user.food_items if current_user.present?
       @search_params = params[:search] 
 
       res = Excon.get( "https://trackapi.nutritionix.com/v2/search/instant?query=#{@search_params}",
@@ -44,12 +45,14 @@ require 'excon'
     end
     
      def create 
-     @model = FoodItem.new(name: params[:name], image: params[:image])
+         
+     @model = current_user.food_items.new(name: params[:name], image: params[:image])
     if  @model.save
       redirect_to food_item_path(@model.id)
     end
      end
     def update
+  
        @model = FoodItem.find(params[:id])
        @model.update(food_item_date_params)
        if @model.save
@@ -70,4 +73,6 @@ require 'excon'
     def food_item_date_params
       params.require(:food_item).permit(:date)
     end
+    
+
 end
