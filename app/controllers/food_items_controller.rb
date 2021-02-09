@@ -4,8 +4,11 @@ require 'excon'
 before_action :authenticate_user!
 
     def index
-        
-      @food_items = current_user.food_items if current_user.present?
+      @count = params.fetch(:count, 0).to_i
+      @food_item_count = current_user.food_items.count
+       @page = params.fetch(:page, 0).to_i
+      
+      @food_items = current_user.food_items.offset(@page).limit(1) if current_user.present?
       @search_params = params[:search] 
 
       res = Excon.get( "https://trackapi.nutritionix.com/v2/search/instant?query=#{@search_params}",
