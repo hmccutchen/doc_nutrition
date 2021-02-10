@@ -13,12 +13,19 @@
 
   <body>
     <% if user_signed_in? %>
-  <%= link_to "Account", edit_user_registration_path %>
+    <div class="navigation-links">
+  <%= link_to "Home", food_items_path %>
+  |
   <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  |
   <%= link_to "User Food List", user_food_items_path(current_user.id) %>
+  </div>
 <% else %>
+<div class="navigation-links">
   <%= link_to "Sign Up", new_user_registration_path %>
-  <%= link_to "Login", new_user_session_path %>
+  |
+ <span> <%= link_to "Login", new_user_session_path %> </span>
+  </div>
 <% end %>
     <%= yield %>
   </body>

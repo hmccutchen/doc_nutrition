@@ -4,11 +4,7 @@ require 'excon'
 before_action :authenticate_user!
 
     def index
-      @count = params.fetch(:count, 0).to_i
-      @food_item_count = current_user.food_items.count
-       @page = params.fetch(:page, 0).to_i
-      
-      @food_items = current_user.food_items.offset(@page).limit(1) if current_user.present?
+     
       @search_params = params[:search] 
 
       res = Excon.get( "https://trackapi.nutritionix.com/v2/search/instant?query=#{@search_params}",
@@ -16,8 +12,10 @@ before_action :authenticate_user!
                         "x-app-key": Rails.application.credentials.nutrition[:nutrition_key]})
                       
       @search_items = JSON.parse(res.body)
-     
-      
+       respond_to do |format|
+           format.js {}
+           format.html {}       
+       end
     end
     
 
@@ -54,16 +52,20 @@ before_action :authenticate_user!
       redirect_to food_item_path(@model.id)
     end
      end
+     
+     def user_food_index
+     @count = params.fetch(:count, 0).to_i
+      @food_item_count = current_user.food_items.count
+       @page = params.fetch(:page, 0).to_i
+      
+      @food_items = current_user.food_items.offset(@page).limit(1) if current_user.present?
+     end
     def update
   
        @model = FoodItem.find(params[:id])
        @model.update(food_item_date_params)
        if @model.save
          redirect_to food_item_path @model.id
-        # respond_to do |format|
-        #   format.js { render "_food_date_form" }
-        #   format.html {}
-        #   end
        end
     end
     

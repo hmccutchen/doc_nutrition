@@ -1,0 +1,11 @@
+           <div class="container">
+              <div class="row">
+           <% @search_items["common"].try(:each) do |item| %>
+          
+             <div class="col-md-3 col-lg-3">
+            <%= image_tag("#{item["photo"]["thumb"]}") %> 
+           <p><%= link_to "#{item["food_name"]}",food_items_path(name: item["food_name"], image: item["photo"]["thumb"]), method: :post %></p> 
+           </div>
+           <% end %>
+           </div>
+      </div>

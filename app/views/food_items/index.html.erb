@@ -4,21 +4,11 @@
   <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-6">
           <%= render "search" %>
-           <% @search_items["common"].try(:each) do |item| %>
-            <%= image_tag("#{item["photo"]["thumb"]}") %> 
-           <p><%= link_to "#{item["food_name"]}",food_items_path(name: item["food_name"], image: item["photo"]["thumb"]), method: :post %></p> 
-           <% end %>
-        </div>
-    <% if current_user.present? %>
-    <div class="col-sm-6 col-md-6 col-lg-6">
-      <% @food_items.each do |food_item| %>
-        <h3> <%=food_item.name %></h3>
-        <%= image_tag("#{food_item.image}") %> 
-        <p><b>Calories:</b> <%=food_item.calories %></p>
-      <% end %>
-       <%= link_to "Previous", user_food_items_path(current_user.id, page: @page - 1,count: @count - 1) unless @count == 0 %> 
-       |
-       <%= link_to "Next", user_food_items_path( current_user.id,page: @page + 1, count: @count + 1) if @count != @food_item_count - 1  %>
-    <% end %>
-  </div>
+          
+        
+      </div>
+       <div id="food-list">
+              
+          </div>
+    </div>
 </div>

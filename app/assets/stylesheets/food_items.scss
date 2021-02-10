@@ -1,3 +1,30 @@
 // Place all the styles related to the food_items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.login{
+  text-align: center;
+}
+
+.navigation-links{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+ 
+  
+}
+
+.navigation-links a:last-child{
+  margin-left: 5px;
+}
+
+.navigation-links a:first-child{
+  
+  margin-right: 5px;
+}
+
+.navigation-links a:nth-child(2){
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
