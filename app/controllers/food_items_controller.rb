@@ -58,7 +58,7 @@ before_action :authenticate_user!
       @food_item_count = current_user.food_items.count
        @page = params.fetch(:page, 0).to_i
       
-      @food_items = current_user.food_items.offset(@page).limit(1) if current_user.present?
+      @food_items = current_user.food_items.offset(@page).limit(4) if current_user.present?
      end
     def update
   

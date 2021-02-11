@@ -1,16 +1,26 @@
  
- <div class="container">
-   
+<h1>What You've Eaten!</h1>
+  
  <% if current_user.present? %>
-    <div class="col-sm-6 col-md-12 col-lg-12">
+  <div class="container">
+ <div class="row">
       <% @food_items.each do |food_item| %>
+       <div class="col-md-3 col-lg-3">
         <h3> <%=food_item.name %></h3>
         <%= image_tag("#{food_item.image}") %> 
         <p><b>Calories:</b> <%=food_item.calories %></p>
+        </div>
       <% end %>
-       <%= link_to "Previous", user_food_items_path(current_user.id, page: @page - 1,count: @count - 1) unless @count == 0 %> 
-       |
-       <%= link_to "Next", user_food_items_path( current_user.id,page: @page + 1, count: @count + 1) if @count != @food_item_count - 1  %>
+      
     <% end %>
+   
   </div>
+  
+  </div>
+  
+  <div class="container row justify-content-center">
+      
+  <%= link_to "Previous", user_food_items_path(current_user.id, page: @page - 1,count: @count - 1) unless @count == 0 %> 
+       |
+  <%= link_to "Next", user_food_items_path( current_user.id,page: @page + 1, count: @count + 1) if @count != @food_item_count - 1  %>
   </div>
