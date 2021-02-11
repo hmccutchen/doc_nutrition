@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'excon-rails'
 gem 'devise'
+gem 'rails_12factor', group: :production
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
