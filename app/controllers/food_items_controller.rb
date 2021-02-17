@@ -8,8 +8,8 @@ before_action :authenticate_user!
       @search_params = params[:search] 
 
       res = Excon.get( "https://trackapi.nutritionix.com/v2/search/instant?query=#{@search_params}",
-            headers: { "x-app-id": Rails.application.credentials.nutrition[:nutrition_id],
-                        "x-app-key": Rails.application.credentials.nutrition[:nutrition_key]})
+            headers: { "x-app-id":  Rails.application.credentials.dig(:nutrition, :nutrition_id),
+                        "x-app-key":  Rails.application.credentials.dig(:nutrition, :nutrition_key)})
                       
       @search_items = JSON.parse(res.body)
        respond_to do |format|
@@ -26,8 +26,8 @@ before_action :authenticate_user!
        req = Excon.post("https://trackapi.nutritionix.com/v2/natural/nutrients",
         body:  { query: "#{@model.name}"
         }.to_json,
-          headers: { "x-app-id": Rails.application.credentials.nutrition[:nutrition_id],
-                      "x-app-key": Rails.application.credentials.nutrition[:nutrition_key],
+          headers: { "x-app-id":  Rails.application.credentials.dig(:nutrition, :nutrition_id),
+                      "x-app-key":  Rails.application.credentials.dig(:nutrition, :nutrition_key),
                       "x-remote-user-id": "0",
                       "content-type": "application/json"
                         

@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+.login{
+  text-align: center;
+}
+
+.navigation-links{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+ 
+  
+}
+
+.navigation-links a:last-child{
+  margin-left: 16px;
+}
+
+.navigation-links a:first-child{
+  
+  margin-right: 5px;
+}
+
+.navigation-links a:nth-child(2){
+  margin-left: 5px;
+  margin-right: 5px;
+}
